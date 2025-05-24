@@ -1,0 +1,15 @@
+[package]
+name = "transaction-retrieval-and-csv-export-service"
+version = "0.1.0"
+edition = "2021"
+authors = ["TRACES"]
+
+[dependencies]
+actix-web = "4"
+actix-rt = "2"
+serde = { version = "1", features = ["derive"] }
+async-stream = "0.3"
+futures-util = "0.3"
+bytes = "1"
+ethers = { version = "2", features = ["abigen", "providers", "rustls"] }
+hex = "0.4"
