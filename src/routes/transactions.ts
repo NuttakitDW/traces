@@ -6,8 +6,10 @@ const SERVICE_MAP = {
 } as const;
 
 export async function handle(request: Request): Promise<Response> {
-    const { pathname } = new URL(request.url);
-    const [, , chainKey, isoDate, walletAddress] = pathname.split("/");
+    const url = new URL(request.url);
+    const chainKey = url.pathname.split("/")[2];
+    const isoDate = url.searchParams.get("date");
+    const walletAddress = url.searchParams.get("address");
 
     if (!chainKey || !isoDate || !walletAddress) {
         return new Response("Bad request", { status: 400 });
