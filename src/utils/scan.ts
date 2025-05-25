@@ -1,3 +1,5 @@
+import type { ScanBlockByTimeResponse } from "../types/scan";
+
 export async function blockByTime(
     apiUrl: string,
     apiAccessKey: string,
@@ -10,11 +12,7 @@ export async function blockByTime(
         `&timestamp=${timestamp}&closest=${closestOption}&apikey=${apiAccessKey}`;
 
     const response = await fetchFunction(requestUrl);
-    const jsonResponse = (await response.json()) as {
-        status: "0" | "1";
-        message: string;
-        result: string;
-    };
+    const jsonResponse = (await response.json()) as ScanBlockByTimeResponse;
 
     if (jsonResponse.status !== "1") {
         throw new Error(jsonResponse.message || "blocknobytime error");
