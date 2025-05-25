@@ -2,12 +2,7 @@ import { CHAINS } from "../config/chains";
 import { parseISO, startOfDay, endOfDay, getUnixTime } from "date-fns";
 import { blockByTime } from "../utils/scan";
 import { fetch } from "undici";
-
-interface ScanTransactionResponse {
-    status: "0" | "1";
-    message: string;
-    result: any[];
-}
+import type { ScanTransactionResponse } from "../types/scan";
 
 export async function fetchEthereumTransactionsByDate(dateISO: string, walletAddress: string) {
     const { api: apiEndpoint, apiKeyEnv: apiKeyEnvironmentVariable } = CHAINS.ethereum;
