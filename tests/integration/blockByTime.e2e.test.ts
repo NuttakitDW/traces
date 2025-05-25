@@ -3,16 +3,16 @@ import { blockByTime } from "../../src/utils/scan";
 import { CHAINS } from "../../src/config/chains";
 import "dotenv/config";
 
-const { api, apiKeyEnv } = CHAINS.ethereum;
-const apiKey = process.env[apiKeyEnv];
+const { api: ethereumApi, apiKeyEnv: ethereumApiKeyEnv } = CHAINS.ethereum;
+const ethereumApiKey = process.env[ethereumApiKeyEnv];
 
-const maybe = apiKey ? test : test.skip;
+const testToRun = ethereumApiKey ? test : test.skip;
 
-maybe("blockByTime hits Etherscan and returns a plausible block", async () => {
-    const ts = 1735689600;
+testToRun("blockByTime hits Etherscan and returns a plausible block", async () => {
+    const timestamp = 1735689600;
 
-    const blk = await blockByTime(api, apiKey!, ts, "before");
-    console.log("block number:", blk);
+    const blockNumber = await blockByTime(ethereumApi, ethereumApiKey!, timestamp, "before");
+    console.log("block number:", blockNumber);
 
-    expect(blk).toBeGreaterThan(19_000_000);
+    expect(blockNumber).toBeGreaterThan(19_000_000);
 });
